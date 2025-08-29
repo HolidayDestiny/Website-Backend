@@ -16,9 +16,11 @@ app.use(bodyParser.json());
 
 // Nodemailer transporter setup
 const transporter = nodemailer.createTransport({
-  host: "localhost",
-  port: 1025,
-  ignoreTLS: true,
+  service: 'gmail',
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.GMAIL_APP_PASSWORD
+  }
 });
 
 // Contact form route
