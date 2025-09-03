@@ -16,12 +16,12 @@ app.use(bodyParser.json());
 
 // Nodemailer transporter setup
 const transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
+    host: 'smtp.zoho.com',
     port: 465,
     secure: true, // Use SSL
     auth: {
         user: process.env.EMAIL_USER,
-        pass: process.env.GMAIL_APP_PASSWORD
+        pass: process.env.EMAIL_PASS
     }
 });
 
@@ -79,7 +79,6 @@ const userEmailHtml = `
         <div class="content">
             <h1>Thank you for your inquiry, ${firstName}!</h1>
             <p>We've received your message and are thrilled to help you plan your next perfect trip. Our team will review the details you provided and get back to you shortly.</p>
-            <p style="text-align:center;"><a href="#" class="btn">View Inquiry Details</a></p>
             <p class="sub-message">
                 Ready to plan your next adventure? Our travel experts are here to help you find the best destinations and deals.
             </p>
