@@ -1,6 +1,4 @@
 
-
-
 require('dotenv').config();
 const express = require('express');
 const nodemailer = require('nodemailer');
@@ -16,12 +14,12 @@ app.use(bodyParser.json());
 
 // Nodemailer transporter setup
 const transporter = nodemailer.createTransport({
-    host: 'smtp.zoho.in',
+    host: 'smtp.zoho.in', // or 'smtp.zoho.com' if your account is global
     port: 465,
     secure: true, // Use SSL
     auth: {
         user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
+        pass: process.env.EMAIL_PASS // must be Zoho App Password
     }
 });
 
@@ -39,12 +37,12 @@ app.post('/api/contact', async (req, res) => {
     numberOfTravelers 
   } = req.body;
 
-  // Required fields validation
   if (!firstName || !lastName || !email || !phone || !subject || !message) {
     return res.status(400).json({ error: 'Please fill all required fields.' });
   }
 
-  // --- User Confirmation Email Template (with logo) ---
+  // --- userEmailHtml + adminEmailHtml stay the same ---
+    // --- User Confirmation Email Template (with logo) ---
 const userEmailHtml = `
 <!DOCTYPE html>
 <html lang="en">
@@ -157,15 +155,16 @@ const adminEmailHtml = `
 `;
 
   const adminMailOptions = {
-    from: `"${firstName} ${lastName}" <${email}>`,
-    to: process.env.RECEIVER_EMAIL, // Admin's email address
+    from: `Holiday Destiny <${process.env.EMAIL_USER}>`, // ✅ Always your Zoho email
+    to: process.env.RECEIVER_EMAIL,
     subject: `New Contact Form Submission: ${subject}`,
     html: adminEmailHtml,
+    replyTo: email // ✅ replies go to the user
   };
 
   const userMailOptions = {
-    from: `Holiday Destiny <${process.env.EMAIL_USER}>`, // Your company email
-    to: email, // User's email address
+    from: `Holiday Destiny <${process.env.EMAIL_USER}>`,
+    to: email,
     subject: `We've Received Your Inquiry!`,
     html: userEmailHtml,
   };
