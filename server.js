@@ -98,7 +98,7 @@ const adminEmailHtml = `
 <body>
     <div class="container">
         <div class="header">
-            <img src="https://holiday-destiny.vercel.app/static/media/HolidayLogo.2ba0fddd792f7a928dad.png" alt="Holiday Destiny Logo">
+            <img src="https://www.holidaydestiny.co.in/static/media/HolidayLogo.2ba0fddd792f7a928dad.png" alt="Holiday Destiny Logo">
         </div>
         <div class="content">
             <h1>New Inquiry from ${firstName} ${lastName}</h1>
