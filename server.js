@@ -149,6 +149,12 @@ const adminEmailHtml = `
   }
 });
 
+// Add this above app.listen
+app.get("/", (req, res) => {
+  res.status(200).send("Backend is alive 🚀");
+});
+
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
